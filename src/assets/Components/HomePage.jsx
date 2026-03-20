@@ -1,0 +1,37 @@
+import React from 'react'
+import HomePageVideoCard from './HomePageVideoCard'
+
+const HomePage = () => {
+    const API_KEY = import.meta.env.VITE_YT_API_KEY
+  const [trendingVideo, setTrendingVideo] = React.useState([])
+
+  React.useEffect(() => {
+    trendingVideos()
+  }, [])
+
+  const trendingVideos = async () => {
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=trending&type=video&videoDuration=long&maxResults=50&key=${API_KEY}`
+    )
+    const data = await res.json()
+    setTrendingVideo(data.items || [])
+  }
+
+  return (
+    <div className='relative overflow-y-auto text-white grid grid-cols-3 gap-x-8 px-4'>
+      {trendingVideo.map((item) => (
+        <div onClick={()=>window.open(`https://www.youtube.com/watch?v=${item.id.videoId}`)} className='cursor-pointer'>
+            
+            <HomePageVideoCard 
+              key={item.id.videoId}
+              title={item.snippet.title}
+              thumbnail={item.snippet.thumbnails.high.url}
+              channelTitle={item.snippet.channelTitle}
+            />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default HomePage
