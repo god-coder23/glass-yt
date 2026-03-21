@@ -12,7 +12,7 @@ const Login = ({ onLogin }) => {
     return (
         <div className={`bg-url${'/src/assets/bac.jpg'} w-screen relative flex justify-center items-center`}>
             <img src="/src/assets/bac.jpg" className='h-screen object-cover w-screen blur-sm scale-110 shrink-0' alt="" />
-            <button onClick={handleLogin} className='absolute hover:scale-90 ring-4 ring-white/20 h-[100px] w-[300px] rounded-4xl backdrop-blur-sm bg-white/10 rounded-4xl text-white font-bold'><div>Sign With Google</div></button>
+            <button onClick={handleLogin} className='absolute hover:scale-90 cursor-pointer ring-4 ring-white/20 h-[100px] w-[300px] rounded-4xl backdrop-blur-sm bg-white/10 rounded-4xl text-white font-bold'><div>Sign With Google</div></button>
         </div>
     )
 }
