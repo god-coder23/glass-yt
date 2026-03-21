@@ -18,7 +18,6 @@ const LogoHamburger = () => {
           YouTube
         </h1>
         </div>
-
       </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { AudioLines, Search } from 'lucide-react';
 import VideoCard from '../VideoCard';
 
-const InputBar = ({onSearch, activeStatePage}) => {
+const InputBar = ({onSearch, activeStatePage,account}) => {
     const API_KEY = import.meta.env.VITE_YT_API_KEY
     const [searchValue, setSearchValue] = React.useState("");
     const [searchResult, setSearchResult] = React.useState([]);
@@ -31,6 +31,9 @@ const InputBar = ({onSearch, activeStatePage}) => {
             <div className='m-3 bg-gradient-to-b from-white/10 to-blue-800/20 backdrop-blur-md rounded-2xl w-10 flex justify-center items-center'>
                 <AudioLines size={30} />
             </div>
+            {account && (
+                <img src={account.photoURL} className='h-9 w-9 ml-2 flex-shrink-0 rounded-full' referrerPolicy='no-referrer' alt="" />
+            )}
         </div>
 
         {activeStatePage === "Search" && searchResult.length > 0 && (

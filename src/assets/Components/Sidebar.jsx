@@ -1,7 +1,7 @@
 import React from 'react'
 import {House, Dumbbell, SquareLibrary, ListVideo, Clock, PlaySquare, ThumbsUp, TrendingUp, Music, Film, Gamepad2 } from 'lucide-react'
 
-const Sidebar = ({activeStatePage,setActiveStatePage}) => {
+const Sidebar = ({activeStatePage,setActiveStatePage,handleLogOut}) => {
 
     const sidebarSection = [
         [
@@ -50,6 +50,11 @@ const Sidebar = ({activeStatePage,setActiveStatePage}) => {
               <div className='border-t border-white/20 my-2'></div>
             </div>
           ))}
+        <button
+          onClick={handleLogOut}
+          className='w-full -mt-2 text-white text-sm bg-white/10 px-3 py-2  rounded-full border border-white/20 hover:bg-white/20 transition'>
+          Logout
+        </button>
         </div>
       </div>
 
@@ -66,6 +71,11 @@ const Sidebar = ({activeStatePage,setActiveStatePage}) => {
             <span className='text-[10px]'>{item.label}</span>
           </div>
         ))}
+     <button
+          onClick={handleLogOut}
+          className='w-30 -mt-1 text-white text-sm bg-white/10 px-3 py-2 rounded-full border border-white/20 hover:bg-white/20 transition'>
+          Logout
+        </button>
       </div>
     </>
   )

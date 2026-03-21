@@ -5,16 +5,32 @@ import Sidebar from './assets/Components/Sidebar'
 import InputBar from './assets/Components/InputBar'
 import HomePage from './assets/Components/HomePage'
 import VideoCard from './assets/VideoCard'
-
-const App = () => {
-
+import Login from './login'
+const App = ({onLogin}) => {
+  const [user, setUser] = React.useState(()=>{
+    const saved = localStorage.getItem('user')
+    return saved ? JSON.parse(saved) :null
+  });
+  
   const [videos, setVideos] = React.useState([]);
   const [searchResult, setSearchResult] = React.useState([])
   const [activeStatePage, setActiveStatePage] = React.useState("Home");
   const handleSearch = (items) =>{
     setVideos(items)
     setActiveStatePage("Search")
+    
   }
+  const handleLogin = (user) => {
+    setUser(user)
+    console.log(user)
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+  const handleLogOut = (user) => {
+    localStorage.removeItem('user')
+    setUser(null)
+    return <Login onLogin={handleLogin} />
+  }
+  if (!user) return <Login onLogin={handleLogin} />
   return (
     <div className='relative w-screen h-screen overflow-hidden'>
       
@@ -29,9 +45,9 @@ const App = () => {
       <div className='flex flex-row justify-center px-6 py-4 items-center'>
       <LogoHamburger />
       </div>
-      <InputBar onSearch={handleSearch} activeStatePage={activeStatePage} />
+      <InputBar onSearch={handleSearch} activeStatePage={activeStatePage} account={user} />
       
-      <Sidebar activeStatePage={activeStatePage} setActiveStatePage={setActiveStatePage} />        
+      <Sidebar handleLogOut={handleLogOut} activeStatePage={activeStatePage} setActiveStatePage={setActiveStatePage} />        
       {activeStatePage === "Home" && (
         <div className='absolute top-20 left-0 md:left-64 right-0 bottom-0 overflow-y-auto px-4 pb-20 md:pb-11 py-11'>
           <HomePage />
