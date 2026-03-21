@@ -10,7 +10,11 @@ const App = () => {
 
   const [videos, setVideos] = React.useState([]);
   const [searchResult, setSearchResult] = React.useState([])
-  
+  const [activeStatePage, setActiveStatePage] = React.useState("Home");
+  const handleSearch = (items) =>{
+    setVideos(items)
+    setActiveStatePage("Search")
+  }
   return (
     <div className='relative w-screen h-screen overflow-hidden'>
       
@@ -25,29 +29,14 @@ const App = () => {
       <div className='flex flex-row justify-center px-6 py-4 items-center'>
       <LogoHamburger />
       </div>
-      <InputBar onSearch={setVideos} />
+      <InputBar onSearch={handleSearch} activeStatePage={activeStatePage} />
       
-      <Sidebar />
-      {videos.length==0 ? (
+      <Sidebar activeStatePage={activeStatePage} setActiveStatePage={setActiveStatePage} />        
+      {activeStatePage === "Home" && (
         <div className='absolute top-20 left-64 right-0 bottom-0 overflow-y-auto px-4 py-11'>
           <HomePage />
         </div>
-      ): (
-        <div className='hidden cursor-pointer' onClick={()=>window.open(`https://www.youtube.com/watch?v=${item.id.videoId}`)}>
-          {videos.map((item)=>(
-            <VideoCard
-                key={item.id.videoId}
-                title={item.snippet.title}
-                thumbnail={item.snippet.thumbnails.high.url}
-                desc={item.snippet.description}
-                channelTitle={item.snippet.channelTitle}
-                
-              />
-          ))}
-        </div>
       )}
-        
-      {/* sidebar*/}
     </div>
   )
 }

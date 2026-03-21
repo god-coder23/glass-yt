@@ -1,7 +1,7 @@
 import React from 'react'
 import {House, Dumbbell, SquareLibrary, ListVideo, Clock, PlaySquare, ThumbsUp, TrendingUp, Music, Film, Gamepad2 } from 'lucide-react'
 
-const Sidebar = () => {
+const Sidebar = ({activeStatePage,setActiveStatePage}) => {
 
     const sidebarSection = [
         [
@@ -35,7 +35,7 @@ const Sidebar = () => {
                 {lstNum.map((item) => (
                   <div
                     key={item.label}
-                    onClick={() => setActive(item.label)}
+                    onClick={() => setActiveStatePage(item.label)}
                     className={`flex items-center gap-3 px-4 py-2.5 rounded-full mt-1 cursor-pointer transition-all text-white
                       ${active === item.label
                         ? 'bg-gradient-to-b from-white/30 to-white/5 ring-1 ring-white/20'
@@ -47,7 +47,7 @@ const Sidebar = () => {
                   </div>
                 ))}
                 {
-                  idx+1%3==0 ? "hello" : <div className='border-t border-white/20 my-2'></div>
+                  (idx+1%3)==0 ? "hello" : <div className='border-t border-white/20 my-2'></div>
                 }
                 
               </div>

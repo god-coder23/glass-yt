@@ -4,7 +4,7 @@ import HomePageVideoCard from './HomePageVideoCard'
 const HomePage = () => {
     const API_KEY = import.meta.env.VITE_YT_API_KEY
   const [trendingVideo, setTrendingVideo] = React.useState([])
-
+  const [activeVideoId, setActiveVideoId] = React.useState(null);
   React.useEffect(() => {
     trendingVideos()
   }, [])
@@ -20,14 +20,29 @@ const HomePage = () => {
   return (
     <div className='relative overflow-y-auto text-white grid grid-cols-3 gap-x-8 px-4'>
       {trendingVideo.map((item) => (
-        <div onClick={()=>window.open(`https://www.youtube.com/watch?v=${item.id.videoId}`)} className='cursor-pointer'>
-            
-            <HomePageVideoCard 
+        <div key={item.id.videoId} onClick={()=>setActiveVideoId(
+            activeVideoId === item.id.videoId ? null : item.id.videoId
+        )} className='cursor-pointer'>
+            {activeVideoId==item.id.videoId ? (
+                 < iframe
+                 className='relative z-20 rounded-2xl'
+                width="100%"
+                height="250" 
+                src={`https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&controls=1&fs=1`}
+                title={item.snippet.title}
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  
+                allowFullScreen={true}
+                />
+            ):(
+                <HomePageVideoCard 
               key={item.id.videoId}
               title={item.snippet.title}
               thumbnail={item.snippet.thumbnails.high.url}
               channelTitle={item.snippet.channelTitle}
             />
+            )}
+            
         </div>
       ))}
     </div>
