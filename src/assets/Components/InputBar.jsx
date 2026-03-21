@@ -7,12 +7,26 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
     const [searchValue, setSearchValue] = React.useState("");
     const [searchResult, setSearchResult] = React.useState([]);
     const [activeVideoId, setActiveVideoId] = React.useState(null);
+    const [error, setError] = React.useState(null);
 
     const fetchAPI = async () => {
-        const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchValue}&type=video&maxResults=50&key=${API_KEY}`)
-        const data = await res.json()
-        setSearchResult(data.items)
-        onSearch(data.items)
+        if (!API_KEY) {
+            setError("YouTube API key is missing. Set VITE_YT_API_KEY in your environment variables.")
+            return
+        }
+        try {
+            const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchValue}&type=video&maxResults=50&key=${API_KEY}`)
+            const data = await res.json()
+            if (!res.ok) {
+                setError(data.error?.message || `YouTube API error (${res.status})`)
+                return
+            }
+            setError(null)
+            setSearchResult(data.items || [])
+            onSearch(data.items || [])
+        } catch (err) {
+            setError("Failed to fetch videos: " + err.message)
+        }
     }
 
   return (
@@ -35,6 +49,12 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
                 <img src={account.photoURL} className='h-9 w-9 ml-2 flex-shrink-0 rounded-full' referrerPolicy='no-referrer' alt="" />
             )}
         </div>
+
+        {error && (
+            <div className='text-red-400 text-center py-4 md:ml-[30%]'>
+                <p>{error}</p>
+            </div>
+        )}
 
         {activeStatePage === "Search" && searchResult.length > 0 && (
             <div className='fixed top-30 md:left-[30%] lg:left-[20%] bottom-0 overflow-y-auto'>
