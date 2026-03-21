@@ -1,6 +1,5 @@
 import React from 'react'
 import HomePageVideoCard from './HomePageVideoCard'
-
 const HomePage = () => {
     const API_KEY = import.meta.env.VITE_YT_API_KEY
   const [trendingVideo, setTrendingVideo] = React.useState([])
