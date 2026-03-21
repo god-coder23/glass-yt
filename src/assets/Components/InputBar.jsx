@@ -17,7 +17,7 @@ const InputBar = ({onSearch, activeStatePage}) => {
 
   return (
     <div className='flex flex-col'>
-        <div className='text-white w-150 h-0 p-6 mt-1 ml-[30%] flex justify-center items-center z-20 flex-row bg-gradient-to-b from-white/40 to-white/1 ring-1 ring-white/20 backdrop-blur-md rounded-4xl'>
+        <div className='text-white w-full sm:w-[30%] md:w-[70%] lg:w-[65%] h-0 p-6 mt-5 md:ml-[30%] flex justify-center items-center z-20 flex-row bg-gradient-to-b from-white/40 to-white/1 ring-1 ring-white/20 backdrop-blur-md rounded-4xl'>
             <input
                 onChange={(e) => setSearchValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && fetchAPI()}
@@ -34,7 +34,7 @@ const InputBar = ({onSearch, activeStatePage}) => {
         </div>
 
         {activeStatePage === "Search" && searchResult.length > 0 && (
-            <div className='fixed top-30 left-80 right-0 bottom-0 overflow-y-auto'>
+            <div className='fixed top-30 md:left-[30%] lg:left-[20%] bottom-0 overflow-y-auto'>
                 <div className='grid gap-x-4 gap-y-6 px-6 py-4'>
                     {searchResult.map((item) => (
                         <div className='cursor-pointer' key={item.id.videoId} onClick={() =>

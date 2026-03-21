@@ -33,7 +33,7 @@ const App = () => {
       
       <Sidebar activeStatePage={activeStatePage} setActiveStatePage={setActiveStatePage} />        
       {activeStatePage === "Home" && (
-        <div className='absolute top-20 left-64 right-0 bottom-0 overflow-y-auto px-4 py-11'>
+        <div className='absolute top-20 left-0 md:left-64 right-0 bottom-0 overflow-y-auto px-4 pb-20 md:pb-11 py-11'>
           <HomePage />
         </div>
       )}

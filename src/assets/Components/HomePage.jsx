@@ -18,14 +18,14 @@ const HomePage = () => {
   }
 
   return (
-    <div className='relative overflow-y-auto text-white grid grid-cols-3 gap-x-8 px-4'>
+    <div className='relative overflow-y-auto text-white grid sm:grid-cols-1 md:grid-cols-2 justify-items-start sm:justify-items-center lg:grid-cols-3 gap-x-8 px-4'>
       {trendingVideo.map((item) => (
         <div key={item.id.videoId} onClick={()=>setActiveVideoId(
             activeVideoId === item.id.videoId ? null : item.id.videoId
-        )} className='cursor-pointer'>
+        )} className='cursor-pointer '>
             {activeVideoId==item.id.videoId ? (
                  < iframe
-                 className='relative z-20 rounded-2xl'
+                 className='relative z-20 rounded-2xl '
                 width="100%"
                 height="250" 
                 src={`https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&controls=1&fs=1`}

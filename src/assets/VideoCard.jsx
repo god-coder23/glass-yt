@@ -1,27 +1,22 @@
 import React from 'react'
 
-const VideoCard = ({ title, thumbnail, desc,channelTitle }) => {
+const VideoCard = ({ title, thumbnail, desc, channelTitle }) => {
   return (
-    <div className='flex flex-row cursor-pointer group w-full h-[220px] gap-3'>
+    <div className='flex flex-col md:flex-row cursor-pointer w-full mb-6 gap-3'>
 
-      <div className='relative flex-shrink-0 w-[390px] h-full rounded-xl overflow-hidden'>
+      {/* Thumbnail */}
+      <div className='relative w-full md:w-[390px] md:h-[220px] h-[200px] flex-shrink-0 rounded-xl overflow-hidden'>
         <img className='object-cover h-full w-full' src={thumbnail} alt="" />
       </div>
 
-      <div className='flex-1 pt-2'>
-        <p className='text-white text-xl font-medium leading-snug line-clamp-2'>
-          {title}
-        </p>
-        <div className='text-gray-400 mt-10 flex flex-col'>
-            <div className='flex flex-row'>
-                <div className='h-6 w-6 bg-gray-500 rounded-full'></div>
-                <div className='flex items-center ml-2'>
-                    {channelTitle}
-                </div>
-            </div>
-            <div className='line-clamp-2'>
-                {desc}
-            </div>
+      <div className='flex gap-3 px-2 md:px-0'>
+        <div className='flex-shrink-0 w-9 h-9 bg-gray-500 rounded-full'></div>
+
+        {/* Text */}
+        <div className='flex flex-col gap-1'>
+          <p className='text-white text-sm font-medium leading-snug line-clamp-2'>{title}</p>
+          <p className='text-gray-400 text-xs'>{channelTitle}</p>
+          <p className='text-gray-400 text-xs line-clamp-2 hidden md:block'>{desc}</p>
         </div>
       </div>
 

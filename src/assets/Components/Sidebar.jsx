@@ -23,38 +23,51 @@ const Sidebar = ({activeStatePage,setActiveStatePage}) => {
           {label:"Gaming" , icon:<Gamepad2 size={20} />},
         ]
       ]
-    
-    
+
       const [active, setActive] = React.useState('Home');
+
   return (
-    <div>
-      <div className='w-62 rounded-3xl h-full ml-6 mt-10 absolute justify-center bg-black/40 border border-white/30 backdrop-blur-sm'>
-        <div className='w-full px-3 flex flex-col gap-4 mt-3' >
-            {sidebarSection.map((lstNum, idx) => (
-              <div key={idx}>
-                {lstNum.map((item) => (
-                  <div
-                    key={item.label}
-                    onClick={() => setActiveStatePage(item.label)}
-                    className={`flex items-center gap-3 px-4 py-2.5 rounded-full mt-1 cursor-pointer transition-all text-white
-                      ${active === item.label
-                        ? 'bg-gradient-to-b from-white/30 to-white/5 ring-1 ring-white/20'
-                        : 'text-white/70 hover:border hover:border-white/10 hover:bg-gray-400/20'
-                      }`}
-                  >
-                    {item.icon}
-                    <span className='text-md font-medium'>{item.label}</span>
-                  </div>
-                ))}
-                {
-                  (idx+1%3)==0 ? "hello" : <div className='border-t border-white/20 my-2'></div>
-                }
-                
-              </div>
-            ))}
+    <>
+      {/* Desktop Sidebar */}
+      <div className='hidden md:block w-62 rounded-3xl h-full ml-6 mt-10 absolute justify-center bg-black/40 border border-white/30 backdrop-blur-sm'>
+        <div className='w-full px-3 flex flex-col gap-4 mt-3'>
+          {sidebarSection.map((lstNum, idx) => (
+            <div key={idx}>
+              {lstNum.map((item) => (
+                <div
+                  key={item.label}
+                  onClick={() => setActiveStatePage(item.label)}
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-full mt-1 cursor-pointer transition-all text-white
+                    ${activeStatePage === item.label
+                      ? 'bg-gradient-to-b from-white/30 to-white/5 ring-1 ring-white/20'
+                      : 'text-white/70 hover:border hover:border-white/10 hover:bg-gray-400/20'
+                    }`}
+                >
+                  {item.icon}
+                  <span className='text-md font-medium'>{item.label}</span>
+                </div>
+              ))}
+              <div className='border-t border-white/20 my-2'></div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+
+      {/* Mobile Bottom Nav */}
+      <div className='fixed bottom-0 left-0 right-0 z-50 flex md:hidden justify-around items-center bg-black/60 backdrop-blur-md border-t border-white/20 py-3 px-4'>
+        {sidebarSection[0].map((item) => (
+          <div
+            key={item.label}
+            onClick={() => setActiveStatePage(item.label)}
+            className={`flex flex-col items-center gap-1 cursor-pointer
+              ${activeStatePage === item.label ? 'text-white' : 'text-white/50'}`}
+          >
+            {item.icon}
+            <span className='text-[10px]'>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 
