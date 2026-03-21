@@ -1,5 +1,6 @@
 import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from './firebase'
+
 import bac from './assets/bac.jpeg'
 const Login = ({ onLogin }) => {
     const handleLogin = async () => {

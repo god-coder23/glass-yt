@@ -2,6 +2,7 @@ import React from 'react'
 
 const VideoCard = ({ title, thumbnail, desc, channelTitle }) => {
   return (
+    
     <div className='flex flex-col md:flex-row cursor-pointer w-full mb-6 gap-3'>
 
       {/* Thumbnail */}

@@ -14,6 +14,7 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
         setSearchResult(data.items)
         onSearch(data.items)
     }
+    
 
   return (
     <div className='flex flex-col'>

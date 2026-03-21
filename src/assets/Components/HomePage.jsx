@@ -10,7 +10,7 @@ const HomePage = () => {
 
   const trendingVideos = async () => {
     const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=trending&type=video&videoDuration=long&maxResults=50&key=${API_KEY}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=mostPopular&type=video&videoDuration=long&maxResults=50&key=${API_KEY}`
     )
     const data = await res.json()
     setTrendingVideo(data.items || [])
