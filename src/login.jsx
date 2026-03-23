@@ -6,7 +6,6 @@ const Login = ({ onLogin }) => {
     const handleLogin = async () => {
         const result = await signInWithPopup(auth, provider)
         onLogin(result.user)
-        console.log(onLogin)
         window.alert(`Signed In As ${result.user.displayName}`)
         
     }
