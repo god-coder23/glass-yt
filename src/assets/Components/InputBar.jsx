@@ -31,12 +31,11 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
     }
 
     const fetchSuggestion = async (query) => {
-    try {
-            const targetUrl = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${encodeURIComponent(query)}`
-            const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`)
+        try {
+            const res = await fetch(`https://corsproxy.io/?https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=${encodeURIComponent(query)}&callback=?`)
             const text = await res.text()
-            const json = JSON.parse(text)
-            const items = json[1].map((item) => item)
+            const json = JSON.parse(text.replace(/^window\.google\.ac\.h\(|\)$/g, ''))
+            const items = json[1].map((item) => item[0])
             setSuggestions(items.slice(0, 6))
         } catch (err) {
             setSuggestions([])
@@ -81,7 +80,7 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
         </div> 
         {/*suggestion hai jo input ke niche dhikega */}
         {showSuggestions && suggestions.length > 0 && (
-           <div className='absolute z-20 flex flex-col items-center backdrop-blur-sm justify-center bg-gray-800/80  rounded-3xl md:ml-[30%] mt-2 w-full sm:w-[30%] top-full mt-2 md:w-[70%] lg:w-[65%]'>
+           <div className='absolute z-20 flex flex-col items-center backdrop-blur-xl shadow-2xl border border-white/5 justify-center bg-black/90  rounded-3xl md:ml-[30%] mt-2 w-full sm:w-[30%] top-full mt-2 md:w-[70%] lg:w-[65%]'>
             {suggestions.map((s,i)=>(
                 <div
                 key={i}
