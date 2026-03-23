@@ -52,7 +52,8 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
 
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col relative'>
+        {/*input search hai */}
         <div className='text-white w-full sm:w-[30%] md:w-[70%] lg:w-[65%] h-0 p-6 mt-5 md:ml-[30%] flex justify-center items-center z-20 flex-row bg-gradient-to-b from-white/40 to-white/1 ring-1 ring-white/20 backdrop-blur-md rounded-4xl'>
             <input
                 value={searchValue}
@@ -76,9 +77,10 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
                 <img src={account.photoURL} className='h-9 w-9 ml-2 flex-shrink-0 rounded-full' referrerPolicy='no-referrer' alt="" />
 
             )}
-        </div>
+        </div> 
+        {/*suggestion hai jo input ke niche dhikega */}
         {showSuggestions && suggestions.length > 0 && (
-           <div className='absolute z-20 flex flex-col items-center backdrop-blur-sm justify-center ml-[30%] mt-[4.5%] bg-gray-800/80  rounded-3xl w-[50%]'>
+           <div className='absolute z-20 flex flex-col items-center backdrop-blur-sm justify-center bg-gray-800/80  rounded-3xl md:ml-[30%] mt-2 w-full sm:w-[30%] top-full mt-2 md:w-[70%] lg:w-[65%]'>
             {suggestions.map((s,i)=>(
                 <div
                 key={i}
