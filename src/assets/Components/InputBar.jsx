@@ -31,11 +31,12 @@ const InputBar = ({onSearch, activeStatePage,account}) => {
     }
 
     const fetchSuggestion = async (query) => {
-        try {
-            const res = await fetch(`https://corsproxy.io/?https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=${encodeURIComponent(query)}&callback=?`)
+    try {
+            const targetUrl = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${encodeURIComponent(query)}`
+            const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`)
             const text = await res.text()
-            const json = JSON.parse(text.replace(/^window\.google\.ac\.h\(|\)$/g, ''))
-            const items = json[1].map((item) => item[0])
+            const json = JSON.parse(text)
+            const items = json[1].map((item) => item)
             setSuggestions(items.slice(0, 6))
         } catch (err) {
             setSuggestions([])
